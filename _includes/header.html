@@ -1,0 +1,20 @@
+<header>
+    {% assign default_paths = site.pages | map: "path" %}
+    {% assign page_paths = site.header_pages | default: default_paths %}
+  <nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="{{ "/" | relative_url }}">{{ site.title | escape }}</a>
+    </div>
+
+    <ul class="nav navbar-nav navbar-right">
+      {% for path in page_paths %}
+            {% assign my_page = site.pages | where: "path", path | first %}
+            {% if my_page.title %}
+      <li class="active"><a href="{{ my_page.url | relative_url }}"><span class="glyphicon glyphicon-user"></span> {{ my_page.title | escape }}</a></li>
+      {% endif %}
+          {% endfor %}
+    </ul>
+  </div>
+</nav>
+</header>
